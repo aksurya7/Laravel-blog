@@ -1,0 +1,47 @@
+@extends('admin.main')
+
+@section('content')
+
+<h1 class="h3 mb-4 text-gray-800">Create post Page</h1>
+
+<a href="post/create" class="btn btn-outline-primary">Create New post</a>
+<a href="post/show" class="btn btn-outline-primary">Show All post Page</a>
+<a href="category/create" class="btn btn-outline-primary">Create Category Page</a>
+<a href="category/show" class="btn btn-outline-primary">Show Category Page</a>
+<hr>
+
+    @if( Session::has('cc'))
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert"> X </button>
+            <strong>{{session('cc')}}</strong>
+        </div>
+        <hr>
+    @endif
+
+
+    @if( Session::has('coc'))
+        <div class="alert alert-danger">
+            <button class="close" data-dismiss="alert">X</button>
+            <strong>{{session('coc')}}</strong>
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <hr>
+    @endif
+
+
+<form method="post" action="{{ route('category.store')}}">
+    @csrf
+    <div class="py-3 px-5">
+        
+        <lable class="col-form-label text-success">Enter post Nane</lable>
+        <input type="text" name="name">
+        <input type="submit" class="btn btn-outline-secondary" >
+    </div>
+    
+</form>
+
+@endsection
